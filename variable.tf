@@ -1,18 +1,21 @@
-variable "region" {
-  description = "enter the region"
-  type        = string
-  default     = "us-east-1"
-}
-variable "profile" {
-  description = "enter the profile"
-  type        = string
-  default     = "default"
+variable "bucket_name" {
+    type = map(any)
+    description = "Bucket values"
 }
 
+variable "aws_managed_policy" {
+    type = list
+    description = "managed policy"
+    default = []
+}
+
+# variable "datalake_data_prefix" {
+#   type = string
+# }
+##KMS
 variable "account_id" {
   description   = "enter the account id"
   type        = string
-  default     = "731084091611"
 }
 variable "common_tags" {
   description = "A mapping of tags to assign to the kms key."
@@ -77,7 +80,7 @@ variable "alias_name" {
 variable "Secret_data" {
   description = "Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file."
   type        = string
-  
+  default = ""
 }
 
 variable "kms_enabled" {

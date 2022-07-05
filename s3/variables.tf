@@ -13,6 +13,7 @@ variable "bucket_acl" {
 variable "bucket_policy" {
   description = "The text of the policy."
   type        = string
+  default = ""
 }
 
 variable "attach_policy" {
@@ -25,4 +26,19 @@ variable "tags" {
   description = "A mapping of tags to assign to the object."
   type        = map(string)
   default     = {}
+}
+variable "versioning_enable"{
+  type = bool
+  default = false
+}
+variable "kms_arn" {
+  type = string
+  description = "kms key arn"
+  default = null
+}
+
+variable "sse_algorithm"{
+  type = string
+  default = "aws:kms"
+  description = "value supported aws:kms or AES256"
 }
