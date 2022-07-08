@@ -41,16 +41,16 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
 
-    - name: run kics Scan
-      uses: checkmarx/kics-github-action@v1.5
-      with:
-        path: .
-        output_path: myResults/
-      continue-on-error: true
+    # - name: run kics Scan
+    #   uses: checkmarx/kics-github-action@v1.5
+    #   with:
+    #     path: .
+    #     output_path: myResults/
+    #   continue-on-error: true
 
-    - name: display kics results
-      run: | 
-        cat myResults/results.json  
+    # - name: display kics results
+    #   run: | 
+    #     cat myResults/results.json  
 
     # - name: Install Terrascan      
     #   run: |
