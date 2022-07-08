@@ -2,7 +2,7 @@ name: 'Terraform QA Plan'
 on:
   push:
     branches:
-    - master
+    - master 
     paths-ignore:
     - 'README.md'
 
