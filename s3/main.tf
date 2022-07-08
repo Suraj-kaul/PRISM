@@ -3,6 +3,7 @@ resource "aws_s3_bucket" "this" {
   acl    = var.bucket_acl != "null" ? var.bucket_acl : null
   versioning {
     enabled = var.versioning_enable
+    mfa_delete = "Enabled"
 
   }
   tags = var.tags
