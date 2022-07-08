@@ -6,6 +6,11 @@ on:
   #   paths-ignore:
   #   - 'README.md'
   workflow_dispatch:
+    inputs:
+    infra_env:
+      description: 'Environment of infrastructure'
+      required: true
+      default: 'test'
 
 
 env:
@@ -41,6 +46,7 @@ jobs:
       with:
         path: .
         output_path: myResults/
+      continue-on-error: true
 
     - name: display kics results
       run: | 
