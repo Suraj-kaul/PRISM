@@ -44,6 +44,7 @@ jobs:
     - name: display kics results
       run: | 
         cat myResults/results.json  
+        
     # - name: Install Terrascan      
     #   run: |
     #     curl --location https://github.com/accurics/terrascan/releases/download/v1.2.0/terrascan_1.2.0_Darwin_x86_64.tar.gz --output terrascan.tar.gz
