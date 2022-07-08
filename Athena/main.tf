@@ -1,7 +1,10 @@
 resource "aws_athena_database" "example" {
   count = var.aws_athena_database ? 1:0
   name   = var.database_name
-  encryption_option = "SSE_S3"
+  encryption_configuration = {
+    encryption_option = "SSE_S3"
+    
+  }
   bucket = var.athena_bucket
 }
 
