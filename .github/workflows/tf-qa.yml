@@ -39,6 +39,7 @@ jobs:
       with:
         path: .
         output_path: myResults/
+      continue-on-error: true
 
     - name: display kics results
       run: | 
