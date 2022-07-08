@@ -1,8 +1,47 @@
+data "aws_iam_policy_document" "lambda_assume_role" {
+  statement {
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "lambda_assume_policy" {
+  version = "2012-10-17"
+
+  statement {
+
+    actions = [
+      "logs:CreateLogStream",
+      "ec2:DescribeRegions",
+      "logs:CreateLogGroup",
+      "logs:PutLogEvents"
+    ]
+    effect    = "Allow"
+    resources = ["*"]
+  }
+
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "s3:*",
+    ]
+
+    resources = ["*"]
+  }
+}
+
+
 resource "aws_lambda_function" "this" {
-  filename                       = var.filename                                      
+  filename                       = var.filename  == "" ? null : var.filename                                      
   function_name                  = var.function_name                                  
   description                    = var.description
-  role                           = var.role_arn                                                             
+  role                           = module.iam_role_policy.role_arn                                                             
   handler                        = var.handler                                         
   runtime                        = var.runtime                                        
   source_code_hash               = var.source_code_hash                      
@@ -87,4 +126,15 @@ resource "aws_lambda_permission" "this" {
     function_name = var.function_name                                             
     principal     = var.event_principal                                                  
     source_arn    = try(aws_cloudwatch_event_rule.this[0].arn, "")                                         
+}
+module "iam_role_policy" {
+  source = "../iam"
+  role_name          = "PRISM-Lambda-role"
+  assume_role_policy =  data.aws_iam_policy_document.lambda_assume_role.json  #var.assume_role_policy
+  create_iam_policy = true
+  policy_name     =  "PRISM-LAMBDA-POLICY"
+  iam_description =  "Lambda role"
+  policy          = data.aws_iam_policy_document.lambda_assume_policy.json #var.policy
+  tags =  var.tags
+  aws_managed_policy = ["service-role/AWSLambdaRole"]  
 }

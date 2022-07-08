@@ -2,6 +2,7 @@
 variable "filename" {
     description = "The path to the function's deployment package within the local filesystem. If defined. No S3 support"
     type        = string
+    default = ""
 }
   
 variable "description" {
@@ -17,11 +18,13 @@ variable "function_name" {
 variable "role_arn" {
   description = "IAM role attached to the Lambda Function. This governs both who / what can invoke your Lambda Function, as well as what resources our Lambda Function has access to."
   type        = string
+  default = ""
 }
 
 variable "handler" {
   description = "The function entrypoint in your code."
   type        = string
+  default = ""
 }
 
 variable "runtime" {

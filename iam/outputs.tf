@@ -1,6 +1,6 @@
  output "policy_arn" {
    description = "iam policy ARN"
-   value       = aws_iam_policy.customer_policy.arn
+   value       = try(aws_iam_policy.customer_policy[0].arn,"")
  }
 
 # output "role_name" {

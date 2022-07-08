@@ -26,10 +26,13 @@ variable "type" {
 }
 variable "catalog_parameters" {
     type = map(any)
+    description = "It holds different map values as per the catalog type"
   
+
 }
 variable "query_name" {
     type = string
+    default= ""
     description = "name of the query"
   
 }
@@ -57,11 +60,6 @@ variable "destination_bucket" {
     description = "name of the bucket"
     default = ""
 }
-# variable "aws_s3_bucket" {
-#     type = bool
-  
-# }
-
 variable "aws_athena_database" {
     type = bool
   
@@ -80,12 +78,14 @@ variable "aws_athena_workgroup" {
   
 }
 
-# variable "demo_bucket" {
-#   type = string
-# }
-
 variable "athena_bucket" {
     type = string
     description = "(optional) describe your variable"
     default = ""
+}
+
+variable "tags" {
+    type = map(string)
+    description = "(optional) describe your variable"
+    default = {}
 }

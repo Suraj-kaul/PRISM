@@ -105,23 +105,28 @@ variable "vpc_id" {
 
 variable "iam_tags" {
     type = map(string)
-    description = "(optional) describe your variable"
+    description = "iam specific tags"
     default = {}
 }
-variable "transfer_server_tags" {
-    type = map(string)
-    description = "(optional) describe your variable"
-    default = {}
-}
-variable "common_tags" {
-    type = map(string)
-    description = "(optional) describe your variable"
-    default = {
-      "Name" = "Aakash"
-    }
-}
+
 variable "aws_managed_policy" {
     type = list(string)
-    description = "(optional) describe your variable"
+    description = "managed policy required"
     default = []
+}
+
+variable "sftp_role_name" {
+  type = string
+  default = ""
+  description = "role name for the SFTP iam role"
+}
+variable "sftp_policy_name" {
+  type = string
+  default = ""
+  description = "Policy name of SFTP"
+}
+variable "sftp_iam_description" {
+  type = string
+  default = ""
+  description = "description about sftp role"
 }

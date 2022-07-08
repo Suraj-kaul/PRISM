@@ -22,14 +22,22 @@ variable "aws_managed_policy" {
 variable "policy_name" {
   description = "Enter the policy name"
   type = string
+  default = ""
 }
 
 variable "iam_description" {
   description = "policy description"
   type        = string
+  default = ""
 }
 
 variable "policy" {
   description = "iam policy for role"
   type        = string
+  default = null
+}
+variable "create_iam_policy" {
+  type = bool
+  description = "(optional) describe your variable"
+  default = true
 }

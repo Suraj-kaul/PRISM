@@ -5,6 +5,7 @@ resource "aws_iam_role" "lambda_role" {
 }
 
 resource "aws_iam_policy" "customer_policy" {
+  count = var.create_iam_policy ? 1 : 0
   name        = var.policy_name                                
   path        = "/"
   description = var.iam_description
@@ -12,8 +13,9 @@ resource "aws_iam_policy" "customer_policy" {
 }
 
 resource "aws_iam_role_policy_attachment" "sns_policy_attached" {
+  count = var.create_iam_policy ? 1 : 0
   role       = aws_iam_role.lambda_role.name                   
-  policy_arn = aws_iam_policy.customer_policy.arn                                        
+  policy_arn = aws_iam_policy.customer_policy[0].arn                                        
 }
 
 

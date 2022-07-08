@@ -1,12 +1,6 @@
-# resource "aws_s3_bucket" "example" {
-#   count = var.aws_s3_bucket ? 1:0
-#   bucket = var.bucket
-# }
-
 resource "aws_athena_database" "example" {
   count = var.aws_athena_database ? 1:0
   name   = var.database_name
-  # bucket = var.aws_s3_bucket == true ? aws_s3_bucket.example[0].bucket : var.demo_bucket
   bucket = var.athena_bucket
 }
 
@@ -17,9 +11,10 @@ resource "aws_athena_data_catalog" "example" {
   type        = var.type
 
   parameters = var.catalog_parameters
+  tags = var.tags
 
 }
-resource "aws_athena_named_query" "foo" {
+resource "aws_athena_named_query" "this" {
   count = var.aws_athena_named_query ? 1:0
   name      = var.query_name
   workgroup = aws_athena_workgroup.athena_workgroup[0].name
@@ -45,5 +40,5 @@ resource "aws_athena_workgroup" "athena_workgroup" {
       }
     }
   }
-  # depends_on = [aws_s3_bucket.example]
+  tags = var.tags
 }
